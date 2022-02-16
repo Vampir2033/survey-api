@@ -1,6 +1,7 @@
 package ru.dorogin.surveyapi.entites;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -15,10 +16,12 @@ public class Survey {
 
     private String title;
     private String description;
+
+    @Column(nullable = false)
     private Date dateStart;
     private Date dateStop;
 
-    @OneToMany(mappedBy = "survey", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "survey", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Question> questions;
 

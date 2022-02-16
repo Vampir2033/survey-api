@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import ru.dorogin.surveyapi.controllers.exceptions.InvalidFieldChangeException;
 import ru.dorogin.surveyapi.controllers.exceptions.SurveyNotFoundException;
 
 @ControllerAdvice
-public class SurveyNotFoundAdvice {
+public class SurveyAdvice {
 
     @ResponseBody
     @ExceptionHandler(SurveyNotFoundException.class)
@@ -16,4 +17,12 @@ public class SurveyNotFoundAdvice {
     String SurveyNotFoundHandler(SurveyNotFoundException ex){
         return ex.getMessage();
     }
+
+    @ResponseBody
+    @ExceptionHandler(InvalidFieldChangeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String SurveyInvalidFieldChange(InvalidFieldChangeException ex){
+        return ex.getMessage();
+    }
+
 }

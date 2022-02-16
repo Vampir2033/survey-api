@@ -19,9 +19,11 @@ public class Question {
     private Survey survey;
 
     private String text;
+
+    @Column(nullable = false)
     private QuestionType questionType;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<AnswerOption> answerOption;
 
@@ -73,4 +75,5 @@ public class Question {
     public void setAnswerOption(List<AnswerOption> answerOption) {
         this.answerOption = answerOption;
     }
+
 }
